@@ -1,0 +1,32 @@
+---
+language: shell
+
+os:
+  - linux
+
+jobs:
+  include:
+    - name: "Focal Fossa Test Build"
+      dist: focal
+    - name: "Bionic Beaver Test Build"
+      dist: bionic
+    - name: "Xenial Xerus Test Build"
+      dist: xenial
+
+git:
+  quiet: true
+  depth: false
+
+addons:
+  apt:
+    update: true
+    packages:
+      - curl
+      - jq
+
+cache:
+  directories:
+    - /usr/local/src
+
+script:
+  - sudo bash ./warp-up.sh --id 12345678-1234-5678-1234-567812345678 --iterations 5 --interval 0 --travis -- || exit 1
