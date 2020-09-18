@@ -6,9 +6,9 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-18 06:39                          #
+# Date           : 2020-09-18 19:47                          #
 # License        : MIT                                       #
-# Version        : 1.1.0                                     #
+# Version        : 2.0.0                                     #
 #                                                            #
 # Usage          : bash warp-up.sh                           #
 ##############################################################
@@ -33,6 +33,10 @@ done
 ####################
 # Script arguments #
 ####################
+
+if [ -f ./warp-up.conf ]; then
+  . ./warp-up.conf
+fi
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -80,6 +84,12 @@ fi
 
 if [ -z "$LOG_FILE" ]; then
   LOG_FILE=warp-up.log
+fi
+
+if [ ! -w "$LOG_FILE" ] && [ ! -w "$(dirname "${LOG_FILE}")" ]; then
+  echo -e "${CRED}Could not write log file $LOG_FILE. Make sure, that you have the required permissions or restart Warp-Up with sudo.${CEND}"
+
+  exit 1
 fi
 
 ####################
@@ -157,7 +167,7 @@ fi
 
 warpUp() {
   sleep $INTERVAL
-  
+
   # Travis should never make API calls
   if [ -n "$TRAVIS_BUILD" ]; then
     if [ "$((1 + RANDOM % (1 + 10 - 1)))" -lt 5 ]; then
@@ -165,10 +175,10 @@ warpUp() {
     else
       FAILURE=$((FAILURE + 1))
     fi
-    
+
     return
   fi
-  
+
   API_URL="https://api.cloudflareclient.com/v0a$((100 + RANDOM % (1 + 999 - 100)))/reg"
   INSTALL_ID=$(rnd 22)
   BODY="$(
@@ -199,14 +209,14 @@ warpUp() {
         --silent \
         "$API_URL"
     )
-      
+
     if [ "$(json_val "$API_RESPONSE" referrer)" = "$REFERRER" ]; then
       SUCCESS=$((SUCCESS + 1))
-      
+
       echo "$(date): Success"
     else
       FAILURE=$((FAILURE + 1))
-      
+
       echo "$(date): $API_RESPONSE"
     fi
   } >>"$LOG_FILE" 2>&1
@@ -283,10 +293,11 @@ if [ -z "$REFERRER" ] || [[ ! "$REFERRER" =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[
 
     if [[ $REFERRER =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{12}\}?$ ]]; then
       if [[ -x "$0" ]]; then
-        exec "$0" --id "$REFERRER" --iterations "$ITERATIONS" --interval "$INTERVAL" --disclaimer "$DISCLAIMER_AGREE" && exit
+        exec bash "$0" --id "$REFERRER" --iterations "$ITERATIONS" --interval "$INTERVAL" --disclaimer "$DISCLAIMER_AGREE" && exit
       else
         break
       fi
+
     else
       echo -ne " ${CYELLOW}Invalid Warp ID provided. Please try again.${CEND}"
       echo ""
@@ -303,10 +314,11 @@ if [ -z "$ITERATIONS" ] || [[ ! "$ITERATIONS" =~ ^[0-9]+$ ]]; then
 
     if [[ "$ITERATIONS" =~ ^[0-9]+$ ]]; then
       if [[ -x "$0" ]]; then
-        exec "$0" --id "$REFERRER" --iterations "$ITERATIONS" --interval "$INTERVAL" --disclaimer "$DISCLAIMER_AGREE" && exit
+        exec bash "$0" --id "$REFERRER" --iterations "$ITERATIONS" --interval "$INTERVAL" --disclaimer "$DISCLAIMER_AGREE" && exit
       else
         break
       fi
+
     else
       echo -ne " ${CYELLOW}Please input numbers only.${CEND}"
       echo ""
@@ -334,7 +346,7 @@ HASH=$(date '+%N' | sha1sum | head -c 40)
 START=$(date)
 END=$(date --date="+$((ITERATIONS * INTERVAL)) seconds")
 
-cat << FOE >> $LOG_FILE
+cat <<FOE >>$LOG_FILE
 <<<<<<<<${HASH}<<<<
 Warp-Up Version   : ${WARP_UP_VER}
 Warp ID           : ${REFERRER}
@@ -364,7 +376,7 @@ else
   done
 fi
 
-cat << FOE >> $LOG_FILE
+cat <<FOE >>$LOG_FILE
 <<<<
 
 FOE

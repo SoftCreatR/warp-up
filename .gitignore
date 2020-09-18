@@ -2,3 +2,4 @@
 vendor/
 composer.lock
 warp-up.log
+warp-up.conf

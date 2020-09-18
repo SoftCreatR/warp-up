@@ -136,6 +136,20 @@ Currently available build options are
 * Interval: 20 seconds
 * Log File: `warp-up.log`
 
+**Configuration File** :
+
+Instead of executing Warp-Up parameterized or through the wizard, you can create a file `warp-up.conf`, including your default configuration. Available options are:
+
+* REFERRER
+* ITERATIONS
+* INTERVAL
+* DISCLAIMER_AGREE
+* LOG_FILE
+
+See [warp-up.conf.dist](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.conf.dist) for an example configuration.
+
+After creating your configuration, simply run `bash warp-up` without parameters, and you are good to go. However, all configuration options can be overridden by executing Warp-Up parameterized, as usual.
+
 #### Additional notes
 
 * You may want to execute Warp-Up on your dedicated server or VPS. Please note, that many IP addresses and ranges are blocked by Cloudflare (e.g. Hetzner) thus they're unable to connect to the cloudflareclient.com API. Instead, you should run Warp-Up on your local machine.

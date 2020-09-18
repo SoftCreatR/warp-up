@@ -1,0 +1,17 @@
+#!/bin/sh
+
+###########
+# General #
+###########
+
+REFERRER=
+ITERATIONS=
+INTERVAL=20
+
+#DISCLAIMER_AGREE=yes
+
+############
+# Log File #
+############
+
+LOG_FILE=warp-up.log
