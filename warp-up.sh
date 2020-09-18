@@ -34,6 +34,7 @@ done
 # Script arguments #
 ####################
 
+# shellcheck disable=SC1091
 if [ -f ./warp-up.conf ]; then
   . ./warp-up.conf
 fi
