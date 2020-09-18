@@ -1,5 +1,7 @@
 <div align=center>
 
+![Logo](https://raw.githubusercontent.com/SoftCreatR/warp-up/main/warp-up-logo.png)
+
 # Warp-Up
 #### Automatically generated referrer bonuses for Cloudflare WARP.
 
