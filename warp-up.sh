@@ -278,6 +278,7 @@ clear
 WELCOME_TXT="Welcome to Warp Up - $WARP_UP_VER"
 WELCOME_LEN=${#WELCOME_TXT}
 
+echo ""
 echo " $(str_repeat "$WELCOME_LEN" "#")"
 echo " $WELCOME_TXT"
 echo " $(str_repeat "$WELCOME_LEN" "#")"
