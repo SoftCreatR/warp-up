@@ -74,7 +74,7 @@ In fact, Warp-Up should work flawlessly on every system with Bash 5 and Curl.
 * Ubuntu 18.04 LTS (__Bionic__ Beaver)
 * Debian 10 (__Buster__)
 * Raspbian 10 (__Buster__)
-* Windows 10 20H2
+* Windows 10 20H2 (requires [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
 
 #### Also compatible
 
@@ -110,7 +110,7 @@ $ bash <(wget -qO - 1-2.dev/warp-up || curl -sL 1-2.dev/warp-up)
 **or (Windows / Powershell)**
 
 ```powershell
-$ curl -sL 1-2.dev/warp-up -o warp-up.sh
+$ Invoke-WebRequest -Uri 1-2.dev/warp-up -OutFile warp-up.sh
 $ bash warp-up.sh
 ```
 
