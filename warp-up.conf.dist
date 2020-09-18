@@ -1,17 +1,16 @@
 #!/bin/sh
 
-###########
-# General #
-###########
-
+# Your Warp ID
 REFERRER=
+
+# Number of iterations or 0 for "run until i kill it"
 ITERATIONS=
+
+# Interval should not undercut 18 seconds
 INTERVAL=20
 
+# Read it, or leave it ;)
 #DISCLAIMER_AGREE=yes
 
-############
-# Log File #
-############
-
+# Log File location (defaults to the current directory)
 LOG_FILE=warp-up.log
