@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  warp-up:
+    build: .
+    container_name: warp-up
+    # Apply your configuration here
+    environment:
+      - REFERRER=
+      - ITERATIONS=
+      - INTERVAL=20
+      - LOG_FILE=warp-up.log
+    tty: true

@@ -122,6 +122,22 @@ $ cd warp-up
 $ bash warp-up.sh
 ```
 
+### Docker
+
+```bash
+$ git clone https://github.com/SoftCreatR/warp-up
+$ cd warp-up/docker
+```
+
+Edit the file `docker-compose.yml` and configure Warp-Up. See [warp-up.conf.dist](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.conf.dist) for an example configuration.
+
+When done, run: 
+
+```bash
+$ sudo docker-compose build
+$ sudo docker-compose run
+```
+
 #### Options available
 
 Currently available build options are
