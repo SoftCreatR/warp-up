@@ -6,9 +6,9 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-18 00:55                          #
+# Date           : 2020-09-18 06:39                          #
 # License        : MIT                                       #
-# Version        : 1.0.1                                     #
+# Version        : 1.1.0                                     #
 #                                                            #
 # Usage          : bash warp-up.sh                           #
 ##############################################################
@@ -21,7 +21,7 @@ command_exists() {
   command -v "$@" >/dev/null 2>&1
 }
 
-required_packages="curl jq"
+required_packages="curl"
 
 for package in $required_packages; do
   if ! command_exists "$package"; then
@@ -156,6 +156,8 @@ fi
 ##################
 
 warpUp() {
+  sleep $INTERVAL
+  
   # Travis should never make API calls
   if [ -n "$TRAVIS_BUILD" ]; then
     if [ "$((1 + RANDOM % (1 + 10 - 1)))" -lt 5 ]; then
@@ -163,11 +165,10 @@ warpUp() {
     else
       FAILURE=$((FAILURE + 1))
     fi
-
-    sleep $INTERVAL
+    
     return
   fi
-
+  
   API_URL="https://api.cloudflareclient.com/v0a$((100 + RANDOM % (1 + 999 - 100)))/reg"
   INSTALL_ID=$(rnd 22)
   BODY="$(
@@ -198,17 +199,17 @@ warpUp() {
         --silent \
         "$API_URL"
     )
-
+      
     if [ "$(json_val "$API_RESPONSE" referrer)" = "$REFERRER" ]; then
       SUCCESS=$((SUCCESS + 1))
+      
+      echo "$(date): Success"
     else
       FAILURE=$((FAILURE + 1))
+      
+      echo "$(date): $API_RESPONSE"
     fi
-
-    echo "$API_RESPONSE"
   } >>"$LOG_FILE" 2>&1
-
-  sleep $INTERVAL
 }
 
 #######
@@ -328,6 +329,25 @@ echo " Generation Process"
 echo " ##################"
 echo ""
 
+# Begin new log entry
+HASH=$(date '+%N' | sha1sum | head -c 40)
+START=$(date)
+END=$(date --date="+$((ITERATIONS * INTERVAL)) seconds")
+
+cat << FOE >> $LOG_FILE
+<<<<<<<<${HASH}<<<<
+Warp-Up Version   : ${WARP_UP_VER}
+Warp ID           : ${REFERRER}
+Iterations        : ${ITERATIONS}
+Interval          : ${INTERVAL}
+
+Process Start     : ${START}
+Process End (est) : ${END}
+
+======
+
+FOE
+
 echo -ne ' Generating extra traffic        [..]\r'
 
 if [ "$ITERATIONS" -lt 1 ]; then
@@ -343,6 +363,11 @@ else
     echo -ne " Generating extra traffic        [${CGREEN}Successful: $SUCCESS${CEND} - ${CRED}Failures: $FAILURE${CEND}]\r"
   done
 fi
+
+cat << FOE >> $LOG_FILE
+<<<<
+
+FOE
 
 echo ""
 echo ""

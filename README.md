@@ -15,6 +15,8 @@
 
 <div align="center">
 
+![Screenshot](https://raw.githubusercontent.com/SoftCreatR/warp-up/main/warp-up.png)
+
 <a href="#about"> About</a> •
 <a href="#disclaimer"> Disclaimer</a> •
 <a href="#compatibility"> Compatibility</a> •
@@ -72,6 +74,7 @@ In fact, Warp-Up should work flawlessly on every system with Bash 5, Curl and jq
 * Ubuntu 18.04 LTS (__Bionic__ Beaver)
 * Debian 10 (__Buster__)
 * Raspbian 10 (__Buster__)
+* Windows 10 20H2
 
 #### Also compatible
 
@@ -127,7 +130,7 @@ Currently available build options are
 
 #### Additional notes
 
-* You may want to execute Warp-Up on your dedicated server or VPS. Please note, that many IP addresses and ranges are blocked by Cloudflare (e.g. Hetzner) thus they're unable to connect to the cloudflareclient.com API. Instead, you should run Warp-Up on your local machine (on Windows, set up [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
+* You may want to execute Warp-Up on your dedicated server or VPS. Please note, that many IP addresses and ranges are blocked by Cloudflare (e.g. Hetzner) thus they're unable to connect to the cloudflareclient.com API. Instead, you should run Warp-Up on your local machine.
 
 * API requests are limited and may result in error responses. In this case, make sure, that you increase the interval option when running Warp-Up or omit the `--interval` argument to use the default value of 20 seconds.
 
