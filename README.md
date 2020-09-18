@@ -144,6 +144,8 @@ Currently available build options are
 
 * You can bypass the disclaimer on startup by executing Warp-Up with the `--disclaimer` argument.
 
+* You may want to run Warp-Up until you stop it manually instead of stopping after N iterations. In this case, execute Warp-Up with `--iterations 0`.
+
 ---
 
 ## Roadmap
