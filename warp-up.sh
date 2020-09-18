@@ -6,9 +6,9 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-18 19:47                          #
+# Date           : 2020-09-18 20:24                          #
 # License        : MIT                                       #
-# Version        : 2.0.0                                     #
+# Version        : 2.0.1                                     #
 #                                                            #
 # Usage          : bash warp-up.sh                           #
 ##############################################################
@@ -159,7 +159,7 @@ json_encode() {
 
 if [ -f "$0" ]; then
   WARP_UP_VER=$(grep -oP 'Version\s+:\s+\K([\d\.]+)' "$0")
-  WARP_UP_LATEST_VER=$(wget -qO- "https://1-2.dev/warp-up?uc" | grep -oP 'Version\s+:\s+\K([\d\.]+)')
+  WARP_UP_LATEST_VER=$(curl -sL "https://1-2.dev/warp-up?uc" | grep -oP 'Version\s+:\s+\K([\d\.]+)')
 fi
 
 ##################
