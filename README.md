@@ -64,7 +64,7 @@ All respective trademarks belong to Cloudflare, Inc.
 
 Every Warp-Up build will be automatically tested against the latest Ubuntu LTS Versions (16.04 and newer) using Travis CI. Compatibility with other operating systems (such as Debian 10) is tested manually.
 
-In fact, Warp-Up should work flawlessly on every system with Bash 5, Curl and jq.
+In fact, Warp-Up should work flawlessly on every system with Bash 5 and Curl.
 
 ### Operating System
 
@@ -91,6 +91,7 @@ In fact, Warp-Up should work flawlessly on every system with Bash 5, Curl and jq
 * Centos 8
 * CentOS 7
 * macOS
+* Windows 10 < 20H2
 
 ---
 
@@ -106,12 +107,19 @@ As soon as the app has been installed, open it and tap on the ☰ Icon. Tap Adva
 $ bash <(wget -qO - 1-2.dev/warp-up || curl -sL 1-2.dev/warp-up)
 ```
 
+**or (Windows / Powershell)**
+
+```powershell
+$ curl -sL 1-2.dev/warp-up -o warp-up.sh
+$ bash warp-up.sh
+```
+
 ### Alternative Method
 
 ```bash
 $ git clone https://github.com/SoftCreatR/warp-up
 $ cd warp-up
-$ sudo warp-up.sh
+$ bash warp-up.sh
 ```
 
 #### Options available
