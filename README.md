@@ -1,7 +1,5 @@
 <div align=center>
 
-![Logo](https://raw.githubusercontent.com/SoftCreatR/warp-up/main/warp-up-logo.png)
-
 # Warp-Up
 #### Automatically generated referrer bonuses for Cloudflare WARP.
 
@@ -106,29 +104,29 @@ As soon as the app has been installed, open it and tap on the ☰ Icon. Tap Adva
 ### One-Step Execution
 
 ```bash
-$ bash <(wget -qO - 1-2.dev/warp-up || curl -sL 1-2.dev/warp-up)
+bash <(wget -qO - 1-2.dev/warp-up || curl -sL 1-2.dev/warp-up)
 ```
 
 **or (Windows / Powershell)**
 
 ```powershell
-$ Invoke-WebRequest -Uri 1-2.dev/warp-up -OutFile warp-up.sh
-$ bash warp-up.sh
+Invoke-WebRequest -Uri 1-2.dev/warp-up -OutFile warp-up.sh
+bash warp-up.sh
 ```
 
 ### Alternative Method
 
 ```bash
-$ git clone https://github.com/SoftCreatR/warp-up
-$ cd warp-up
-$ bash warp-up.sh
+git clone https://github.com/SoftCreatR/warp-up
+cd warp-up
+bash warp-up.sh
 ```
 
 ### Docker
 
 ```bash
-$ git clone https://github.com/SoftCreatR/warp-up
-$ cd warp-up/docker
+git clone https://github.com/SoftCreatR/warp-up
+cd warp-up/docker
 ```
 
 Edit the file `docker-compose.yml` and configure Warp-Up. See [warp-up.conf.dist](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.conf.dist) for an example configuration.
@@ -136,8 +134,8 @@ Edit the file `docker-compose.yml` and configure Warp-Up. See [warp-up.conf.dist
 When done, run: 
 
 ```bash
-$ sudo docker-compose build
-$ sudo docker-compose run
+sudo docker-compose build
+sudo docker-compose run
 ```
 
 #### Options available
