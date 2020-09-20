@@ -134,8 +134,8 @@ Edit the file `docker-compose.yml` and configure Warp-Up. See [warp-up.conf.dist
 When done, run: 
 
 ```bash
-sudo docker-compose build
-sudo docker-compose run
+sudo docker build --tag warp-up:latest .
+sudo docker run -it warp-up
 ```
 
 #### Options available

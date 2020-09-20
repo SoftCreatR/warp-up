@@ -6,9 +6,9 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-18 20:24                          #
+# Date           : 2020-09-20 21:36                          #
 # License        : MIT                                       #
-# Version        : 2.0.1                                     #
+# Version        : 2.0.2                                     #
 #                                                            #
 # Usage          : bash warp-up.sh                           #
 ##############################################################
@@ -191,7 +191,7 @@ warpUp() {
       warp_enabled ^false \
       tos "$(date '+%Y-%m-%dT%T.000%:z')" \
       type Android \
-      locale "$(locale | grep LANG= | cut -d= -f2 | cut -d. -f1)"
+      locale "en_US"
   )"
 
   {
@@ -218,7 +218,19 @@ warpUp() {
     else
       FAILURE=$((FAILURE + 1))
 
-      echo "$(date): $API_RESPONSE"
+      if [[ $API_RESPONSE == *"Access denied"* ]]; then
+        echo -ne "\ec"
+        echo ""
+        echo -e "${CRED}Unable to establish an API connection. Aborting.${CEND}"
+        echo ""
+        echo ""
+
+        exit 1
+      elif [[ $API_RESPONSE == "Internal Server Error" ]]; then
+        echo "$(date): Failure: Internal Server Error. If this problem persists, restart Warp-Up with an increased request interval."
+      else
+        echo "$(date): Failure."
+      fi
     fi
   } >>"$LOG_FILE" 2>&1
 }
@@ -228,7 +240,7 @@ warpUp() {
 #######
 
 if [ -z "$TRAVIS_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
-  clear
+  echo -ne "\ec"
 
   echo " DISCLAIMER"
   echo ""
@@ -253,7 +265,7 @@ if [ -z "$TRAVIS_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
   echo ""
 
   while true; do
-    read -rp " Do you agree? (y/n): " yn </dev/tty
+    read -rep " Do you agree? (y/n): " yn </dev/tty
 
     case $yn in
     [Yy]*)
@@ -273,7 +285,7 @@ if [ -z "$TRAVIS_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
   done
 fi
 
-clear
+echo -ne "\ec"
 
 WELCOME_TXT="Welcome to Warp Up - $WARP_UP_VER"
 WELCOME_LEN=${#WELCOME_TXT}
@@ -291,7 +303,7 @@ fi
 
 if [ -z "$REFERRER" ] || [[ ! "$REFERRER" =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{12}\}?$ ]]; then
   while true; do
-    read -n 36 -rp " Warp ID    : " REFERRER </dev/tty
+    read -rep " Warp ID    : " REFERRER </dev/tty
 
     if [[ $REFERRER =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{12}\}?$ ]]; then
       if [[ -x "$0" ]]; then
@@ -312,7 +324,7 @@ fi
 
 if [ -z "$ITERATIONS" ] || [[ ! "$ITERATIONS" =~ ^[0-9]+$ ]]; then
   while true; do
-    read -rp " Iterations : " ITERATIONS </dev/tty
+    read -rep " Iterations : " ITERATIONS </dev/tty
 
     if [[ "$ITERATIONS" =~ ^[0-9]+$ ]]; then
       if [[ -x "$0" ]]; then
@@ -334,8 +346,8 @@ fi
 echo " Interval   : $INTERVAL"
 
 echo ""
-echo " Log File : $LOG_FILE"
-echo " Travis   : ${TRAVIS_BUILD:-"no"}"
+echo " Log File   : $LOG_FILE"
+echo " Travis     : ${TRAVIS_BUILD:-"no"}"
 echo ""
 
 echo " ##################"
@@ -344,9 +356,8 @@ echo " ##################"
 echo ""
 
 # Begin new log entry
-HASH=$(date '+%N' | sha1sum | head -c 40)
+HASH=$(date '+%s%N' | sha1sum | head -c 40)
 START=$(date)
-END=$(date --date="+$((ITERATIONS * INTERVAL)) seconds")
 
 cat <<FOE >>$LOG_FILE
 <<<<<<<<${HASH}<<<<
@@ -356,7 +367,6 @@ Iterations        : ${ITERATIONS}
 Interval          : ${INTERVAL}
 
 Process Start     : ${START}
-Process End (est) : ${END}
 
 ======
 
