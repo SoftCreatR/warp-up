@@ -1,0 +1,25 @@
+---
+name: TestRun
+
+on:
+  push:
+    paths:
+      - 'warp-up.sh'
+  pull_request:
+    paths:
+      - 'warp-up.sh'
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  TestRun:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Run
+        run: bash warp-up.sh --id 12345678-1234-5678-1234-567812345678 --iterations 5 --interval 0 --travis -- || exit 1
+

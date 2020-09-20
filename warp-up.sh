@@ -6,7 +6,7 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-20 21:36                          #
+# Date           : 2020-09-20 21:37                          #
 # License        : MIT                                       #
 # Version        : 2.0.2                                     #
 #                                                            #
