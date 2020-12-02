@@ -110,7 +110,7 @@ bash <(wget -qO - 1-2.dev/warp-up/warp-up.sh || curl -sL 1-2.dev/warp-up/warp-up
 **or (Windows / Powershell)**
 
 ```powershell
-Invoke-WebRequest -Uri 1-2.dev/warp-up -OutFile warp-up.sh
+Invoke-WebRequest -Uri 1-2.dev/warp-up/warp-up.sh -OutFile warp-up.sh
 bash warp-up.sh
 ```
 
