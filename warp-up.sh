@@ -356,7 +356,7 @@ echo " ##################"
 echo ""
 
 # Begin new log entry
-HASH=$(date '+%s%N' | sha1sum | head -c 40)
+HASH=$(date '+%s%N' | shasum | head -c 40)
 START=$(date)
 
 cat <<FOE >>$LOG_FILE
