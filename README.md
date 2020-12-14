@@ -104,13 +104,13 @@ As soon as the app has been installed, open it and tap on the ☰ Icon. Tap Adva
 ### One-Step Execution
 
 ```bash
-bash <(wget -qO - 1-2.dev/warp-up/warp-up.sh || curl -sL 1-2.dev/warp-up/warp-up.sh)
+bash <(wget -qO - dist.1-2.dev/warp-up || curl -sL dist.1-2.dev/warp-up)
 ```
 
 **or (Windows / Powershell)**
 
 ```powershell
-Invoke-WebRequest -Uri 1-2.dev/warp-up/warp-up.sh -OutFile warp-up.sh
+Invoke-WebRequest -Uri dist.1-2.dev/warp-up -OutFile warp-up.sh
 bash warp-up.sh
 ```
 
