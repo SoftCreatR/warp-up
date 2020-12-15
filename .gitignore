@@ -3,3 +3,5 @@ vendor/
 composer.lock
 warp-up.log
 warp-up.conf
+warp-up*.zip
+warp-up*.ps1

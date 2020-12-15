@@ -110,8 +110,7 @@ bash <(wget -qO - dist.1-2.dev/warp-up || curl -sL dist.1-2.dev/warp-up)
 **or (Windows / Powershell)**
 
 ```powershell
-Invoke-WebRequest -Uri dist.1-2.dev/warp-up -OutFile warp-up.sh
-bash warp-up.sh
+PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/SoftCreatR/warp-up/main/install-warp-up.ps1 | iex"
 ```
 
 ### Alternative Method

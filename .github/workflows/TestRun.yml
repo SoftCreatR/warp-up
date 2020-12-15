@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - 'warp-up.sh'
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
   pull_request:
     paths:
       - 'warp-up.sh'
-  schedule:
-    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 jobs:
@@ -18,8 +20,7 @@ jobs:
 
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Run
         run: bash warp-up.sh --id 12345678-1234-5678-1234-567812345678 --iterations 5 --interval 0 --travis -- || exit 1
-
