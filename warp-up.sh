@@ -6,9 +6,9 @@
 #                  for Cloudflare WARP.                      #
 #                                                            #
 # Author         : Sascha Greuel <hello@1-2.dev>             #
-# Date           : 2020-09-20 21:37                          #
+# Date           : 2021-04-03 19:07                          #
 # License        : MIT                                       #
-# Version        : 2.0.2                                     #
+# Version        : 2.1.0                                     #
 #                                                            #
 # Usage          : bash warp-up.sh                           #
 ##############################################################
@@ -56,8 +56,8 @@ while [ "$#" -gt 0 ]; do
   --disclaimer)
     DISCLAIMER_AGREE="yes"
     ;;
-  --travis)
-    TRAVIS_BUILD="yes"
+  --ci)
+    CI_BUILD="yes"
     ;;
   *) ;;
   esac
@@ -159,7 +159,7 @@ json_encode() {
 
 if [ -f "$0" ]; then
   WARP_UP_VER=$(grep -oP 'Version\s+:\s+\K([\d\.]+)' "$0")
-  WARP_UP_LATEST_VER=$(curl -sL "https://1-2.dev/warp-up?uc" | grep -oP 'Version\s+:\s+\K([\d\.]+)')
+  WARP_UP_LATEST_VER=$(curl -sL "https://dist.1-2.dev/warp-up?uc" | grep -oP 'Version\s+:\s+\K([\d\.]+)')
 fi
 
 ##################
@@ -167,10 +167,10 @@ fi
 ##################
 
 warpUp() {
-  sleep $INTERVAL
+  sleep "$INTERVAL"
 
-  # Travis should never make API calls
-  if [ -n "$TRAVIS_BUILD" ]; then
+  # CI should never make API calls
+  if [ -n "$CI_BUILD" ]; then
     if [ "$((1 + RANDOM % (1 + 10 - 1)))" -lt 5 ]; then
       SUCCESS=$((SUCCESS + 1))
     else
@@ -178,6 +178,12 @@ warpUp() {
     fi
 
     return
+  fi
+
+  TMP_DIR="/tmp"
+
+  if [ -n "$TMPDIR" ]; then
+    TMP_DIR="$TMPDIR"
   fi
 
   API_URL="https://api.cloudflareclient.com/v0a$((100 + RANDOM % (1 + 999 - 100)))/reg"
@@ -198,8 +204,8 @@ warpUp() {
     API_RESPONSE=$(
       curl \
         --compressed \
-        --cookie "/tmp/cfwarp.txt" \
-        --cookie-jar "/tmp/cfwarp.txt" \
+        --cookie "$TMP_DIR/cfwarp.txt" \
+        --cookie-jar "$TMP_DIR/cfwarp.txt" \
         --header "Content-Type: application/json" \
         --header "Host: api.cloudflareclient.com" \
         --header "Connection: Keep-Alive" \
@@ -218,7 +224,7 @@ warpUp() {
     else
       FAILURE=$((FAILURE + 1))
 
-      if [[ $API_RESPONSE == *"Access denied"* ]]; then
+      if [[ "$API_RESPONSE" == *"Access denied"* ]]; then
         echo -ne "\ec"
         echo ""
         echo -e "${CRED}Unable to establish an API connection. Aborting.${CEND}"
@@ -226,7 +232,7 @@ warpUp() {
         echo ""
 
         exit 1
-      elif [[ $API_RESPONSE == "Internal Server Error" ]]; then
+      elif [[ "$API_RESPONSE" == "Internal Server Error" ]]; then
         echo "$(date): Failure: Internal Server Error. If this problem persists, restart Warp-Up with an increased request interval."
       else
         echo "$(date): Failure."
@@ -239,7 +245,7 @@ warpUp() {
 # Run #
 #######
 
-if [ -z "$TRAVIS_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
+if [ -z "$CI_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
   echo -ne "\ec"
 
   echo " DISCLAIMER"
@@ -267,7 +273,7 @@ if [ -z "$TRAVIS_BUILD" ] && [ -z "$DISCLAIMER_AGREE" ]; then
   while true; do
     read -rep " Do you agree? (y/n): " yn </dev/tty
 
-    case $yn in
+    case "$yn" in
     [Yy]*)
       break
       ;;
@@ -296,7 +302,7 @@ echo " $WELCOME_TXT"
 echo " $(str_repeat "$WELCOME_LEN" "#")"
 echo ""
 
-if [ -z "$TRAVIS_BUILD" ] && [ -n "$WARP_UP_VER" ] && [ "$(version "$WARP_UP_VER")" -lt "$(version "$WARP_UP_LATEST_VER")" ]; then
+if [ -z "$CI_BUILD" ] && [ -n "$WARP_UP_VER" ] && [ "$(version "$WARP_UP_VER")" -lt "$(version "$WARP_UP_LATEST_VER")" ]; then
   echo -e " ${CYELLOW}A newer Warp Up version ($WARP_UP_LATEST_VER) is available!${CEND}"
   echo ""
 fi
@@ -305,7 +311,7 @@ if [ -z "$REFERRER" ] || [[ ! "$REFERRER" =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[
   while true; do
     read -rep " Warp ID    : " REFERRER </dev/tty
 
-    if [[ $REFERRER =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{12}\}?$ ]]; then
+    if [[ "$REFERRER" =~ ^\{?[A-F0-9a-f]{8}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{4}-[A-F0-9a-f]{12}\}?$ ]]; then
       if [[ -x "$0" ]]; then
         exec bash "$0" --id "$REFERRER" --iterations "$ITERATIONS" --interval "$INTERVAL" --disclaimer "$DISCLAIMER_AGREE" && exit
       else
@@ -347,7 +353,7 @@ echo " Interval   : $INTERVAL"
 
 echo ""
 echo " Log File   : $LOG_FILE"
-echo " Travis     : ${TRAVIS_BUILD:-"no"}"
+echo " CI Build   : ${CI_BUILD:-"no"}"
 echo ""
 
 echo " ##################"
@@ -356,10 +362,10 @@ echo " ##################"
 echo ""
 
 # Begin new log entry
-HASH=$(date '+%s%N' | shasum | head -c 40)
+HASH=$(date '+%s%N' | sha1sum | head -c 40)
 START=$(date)
 
-cat <<FOE >>$LOG_FILE
+cat <<FOE >> "$LOG_FILE"
 <<<<<<<<${HASH}<<<<
 Warp-Up Version   : ${WARP_UP_VER}
 Warp ID           : ${REFERRER}
@@ -388,7 +394,7 @@ else
   done
 fi
 
-cat <<FOE >>$LOG_FILE
+cat <<FOE >> "$LOG_FILE"
 <<<<
 
 FOE

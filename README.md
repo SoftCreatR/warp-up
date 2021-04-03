@@ -3,7 +3,7 @@
 # Warp-Up
 #### Automatically generated referrer bonuses for Cloudflare WARP.
 
-[![Shellcheck](https://img.shields.io/github/workflow/status/SoftCreatR/warp-up/Shellcheck?label=Build&style=flat-square)](https://github.com/SoftCreatR/warp-up/actions?query=workflow%3ATestRun) [![Shellcheck](https://img.shields.io/github/workflow/status/SoftCreatR/warp-up/Shellcheck?label=Shellcheck&style=flat-square)](https://github.com/SoftCreatR/warp-up/actions?query=workflow%3AShellcheck)
+[![Build](https://img.shields.io/github/workflow/status/SoftCreatR/warp-up/TestRun?style=flat-square)](https://github.com/SoftCreatR/imei/actions/workflows/TestRun.yml)
 
 [![Commits](https://img.shields.io/github/last-commit/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/commits/main) [![GitHub release](https://img.shields.io/github/release/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/releases) [![GitHub license](https://img.shields.io/github/license/SoftCreatR/warp-up?style=flat-square&color=lightgray)](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) ![Installs](https://img.shields.io/badge/dynamic/json?style=flat-square&color=blue&label=Installs&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fsoftcreatr%2Fwarpup) [![GitHub file size in bytes](https://img.shields.io/github/size/SoftCreatR/warp-up/warp-up.sh?style=flat-square)](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.sh)
 
