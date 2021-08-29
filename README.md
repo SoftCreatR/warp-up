@@ -5,7 +5,7 @@
 
 [![Build](https://img.shields.io/github/workflow/status/SoftCreatR/warp-up/TestRun?style=flat-square)](https://github.com/SoftCreatR/imei/actions/workflows/TestRun.yml)
 
-[![Commits](https://img.shields.io/github/last-commit/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/commits/main) [![GitHub release](https://img.shields.io/github/release/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/releases) [![GitHub license](https://img.shields.io/github/license/SoftCreatR/warp-up?style=flat-square&color=lightgray)](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) ![Installs](https://img.shields.io/badge/dynamic/json?style=flat-square&color=blue&label=Installs&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fsoftcreatr%2Fwarpup) [![GitHub file size in bytes](https://img.shields.io/github/size/SoftCreatR/warp-up/warp-up.sh?style=flat-square)](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.sh)
+[![Commits](https://img.shields.io/github/last-commit/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/commits/main) [![GitHub release](https://img.shields.io/github/release/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/releases) [![GitHub license](https://img.shields.io/github/license/SoftCreatR/warp-up?style=flat-square&color=lightgray)](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE.md) ![Installs](https://img.shields.io/badge/dynamic/json?style=flat-square&color=blue&label=Installs&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fsoftcreatr%2Fwarpup) [![GitHub file size in bytes](https://img.shields.io/github/size/SoftCreatR/warp-up/warp-up.sh?style=flat-square)](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.sh)
 
 [![Codacy grade](https://img.shields.io/codacy/grade/e6f902ad09d14d98b5deea2381b67fde?style=flat-square)](https://www.codacy.com/gh/SoftCreatR/warp-up/dashboard) [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SoftCreatR/warp-up?style=flat-square)](https://www.codefactor.io/repository/github/softcreatr/warp-up)
 
@@ -182,18 +182,14 @@ After creating your configuration, simply run `bash warp-up` without parameters,
 
 ---
 
-## Roadmap
-
-TBA
-
 ## Contributing
 
 If you have any ideas, just open an issue and describe what you would like to add/change in Warp-Up.
 
 If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome.
 
-## License
+## License 🌳
 
-[MIT](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) © [1-2.dev](https://1-2.dev)
+[ISC](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) © [1-2.dev](https://1-2.dev)
 
 This package is Treeware. If you use it in production, then we ask that you [**buy the world a tree**](https://ecologi.com/softcreatr?r=61212ab3fc69b8eb8a2014f4) to thank us for our work. By contributing to the ecologi project, you’ll be creating employment for local families and restoring wildlife habitats.
