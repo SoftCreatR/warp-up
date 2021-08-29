@@ -7,7 +7,7 @@
 
 [![Commits](https://img.shields.io/github/last-commit/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/commits/main) [![GitHub release](https://img.shields.io/github/release/SoftCreatR/warp-up?style=flat-square)](https://github.com/SoftCreatR/warp-up/releases) [![GitHub license](https://img.shields.io/github/license/SoftCreatR/warp-up?style=flat-square&color=lightgray)](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) ![Installs](https://img.shields.io/badge/dynamic/json?style=flat-square&color=blue&label=Installs&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fsoftcreatr%2Fwarpup) [![GitHub file size in bytes](https://img.shields.io/github/size/SoftCreatR/warp-up/warp-up.sh?style=flat-square)](https://github.com/SoftCreatR/warp-up/blob/main/warp-up.sh)
 
-[![Codacy grade](https://img.shields.io/codacy/grade/325d797fcbbf44df9dbed8af3ba8e1f4?style=flat-square)](http://app.codacy.com/manual/SoftCreatR/warp-up/dashboard?token=hIBh9xPtZzernpa) [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SoftCreatR/warp-up?style=flat-square)](https://www.codefactor.io/repository/github/softcreatr/warp-up)
+[![Codacy grade](https://img.shields.io/codacy/grade/e6f902ad09d14d98b5deea2381b67fde?style=flat-square)](https://www.codacy.com/gh/SoftCreatR/warp-up/dashboard) [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SoftCreatR/warp-up?style=flat-square)](https://www.codefactor.io/repository/github/softcreatr/warp-up)
 
 </div>
 
@@ -70,16 +70,21 @@ In fact, Warp-Up should work flawlessly on every system with Bash 5 and Curl.
 
 #### Recommended
 
-* Ubuntu 20.04 LTS (__Focal__ Fossa)
-* Ubuntu 18.04 LTS (__Bionic__ Beaver)
+* Ubuntu 20.04 (__Focal__ Fossa)
+* Ubuntu 18.04 (__Bionic__ Beaver)
 * Debian 10 (__Buster__)
 * Raspbian 10 (__Buster__)
-* Windows 10 20H2 (requires [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+* Windows 10 20H2 (requires [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
 
 #### Also compatible
 
+* Ubuntu 21.10 (__Impish__ Indri)
+* Ubuntu 21.04 (__Hirsute__ Hippo)
+* Ubuntu 20.10 (__Groovy__ Gorilla)
 * Ubuntu 19.10 (__Eoan__ Ermine)
-* Ubuntu 16.04 LTS (__Xenial__ Xerus)
+* Ubuntu 17.04 (__Zesty__ Zapus)
+* Ubuntu 16.04 (__Xenial__ Xerus)
+* Debian 11 (__Bullseye__)
 * Debian 9 (__Stretch__)
 * Raspbian 9 (__Stretch__)
 
@@ -190,3 +195,5 @@ If you'd like to contribute, please fork the repository and make changes as you'
 ## License
 
 [MIT](https://github.com/SoftCreatR/warp-up/blob/main/LICENSE) © [1-2.dev](https://1-2.dev)
+
+This package is Treeware. If you use it in production, then we ask that you [**buy the world a tree**](https://ecologi.com/softcreatr?r=61212ab3fc69b8eb8a2014f4) to thank us for our work. By contributing to the ecologi project, you’ll be creating employment for local families and restoring wildlife habitats.
