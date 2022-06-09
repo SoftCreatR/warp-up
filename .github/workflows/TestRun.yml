@@ -1,4 +1,3 @@
----
 name: TestRun
 
 on:
@@ -16,24 +15,24 @@ on:
 
 jobs:
   ShellCheck:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
 
       - name: Run Shellcheck
-        uses: azohra/shell-linter@v0.4.0
+        uses: azohra/shell-linter@v0.6.0
         with:
           path: "warp-up.sh"
 
   TestRun:
     needs: ShellCheck
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
 
       - name: Run
         run: bash warp-up.sh --id 12345678-1234-5678-1234-567812345678 --iterations 3 --interval 0 --ci -- || exit 1
