@@ -70,11 +70,13 @@ In fact, Warp-Up should work flawlessly on every system with Bash 5 and Curl.
 
 #### Recommended
 
+* Ubuntu 22.04 (__Jammy__ Jellyfish)
 * Ubuntu 20.04 (__Focal__ Fossa)
 * Ubuntu 18.04 (__Bionic__ Beaver)
 * Debian 10 (__Buster__)
 * Raspbian 10 (__Buster__)
-* Windows 10 20H2 (requires [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+* Windows 11 (requires [WSL 2](https://docs.microsoft.com/windows/wsl/install))
+* Windows 10 20H2 (requires [WSL 2](https://docs.microsoft.com/windows/wsl/install))
 
 #### Also compatible
 
@@ -106,7 +108,7 @@ Before you can start using this tool, you need a WARP ID. To obtain it, [downloa
 
 As soon as the app has been installed, open it and tap on the ☰ Icon. Tap Advanced -> Diagnostics and copy your ID from the client configuration.
 
-### One-Step Execution
+### One-Step Execution (Linux / WSL)
 
 ```bash
 bash <(curl -sL dist.1-2.dev/warp-up)
@@ -115,7 +117,7 @@ bash <(curl -sL dist.1-2.dev/warp-up)
 **or (Windows / Powershell)**
 
 ```powershell
-PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/SoftCreatR/warp-up/main/install-warp-up.ps1 | iex"
+PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/SoftCreatR/warp-up/main/install-warp-up.ps1 | iex && bash warp-up.sh"
 ```
 
 ### Alternative Method
